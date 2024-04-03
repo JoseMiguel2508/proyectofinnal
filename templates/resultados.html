@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda</title>
+    <style>
+        .movie-img {
+            max-width: 100px;
+            max-height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Resultados de Búsqueda</h2>
+    {% if movies %}
+        <ul>
+            {% for movie in movies %}
+                <li>
+                    <img src="{{ movie.Poster }}" alt="{{ movie.Title }}" class="movie-img">
+                    <a href="/detalle/{{ movie.Title }}">{{ movie.Title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>

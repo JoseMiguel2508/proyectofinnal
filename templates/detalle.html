@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de la Película</title>
+    <style>
+        /* Estilos de la barra de navegación */
+        .navbar {
+            background-color: #007bff; /* Color de fondo azul */
+            overflow: hidden;
+            padding: 10px 0; /* Añadir espacio alrededor de la barra de navegación */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white; /* Color del texto blanco */
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #3781d2; /* Color de fondo azul oscuro al pasar el mouse */
+        }
+
+        /* Estilos del cuerpo */
+        body {
+            background-color: #f8f9fa; /* Color de fondo gris claro */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilos de la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white; /* Color de fondo blanco para la tabla */
+            border-radius: 10px; /* Bordes redondeados */
+            overflow: hidden; /* Ocultar contenido que se desborda */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <a href="#">Inicio</a>
+        <a href="#">Películas</a>
+        <a href="#">Contacto</a>
+    </div>
+
+    <!-- Contenido principal -->
+    {% if title %}
+        <h2 style="text-align: center;">Detalle de la Película: {{ title }}</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Descripción</th>
+                    <td>{{ description }}</td>
+                </tr>
+                <tr>
+                    <th>Fecha de Lanzamiento</th>
+                    <td>{{ release_date }}</td>
+                </tr>
+                <tr>
+                    <th>Idioma Original</th>
+                    <td>{{ original_language }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% if similar_movies %}
+            <h3 style="text-align: center;">Películas Similares:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in similar_movies %}
+                        <tr>
+                            <td>{{ movie }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p style="text-align: center;">No se encontraron películas similares.</p>
+        {% endif %}
+    {% else %}
+        <p style="text-align: center;">No se encontraron detalles para esta película.</p>
+    {% endif %}
+</body>
+</html>

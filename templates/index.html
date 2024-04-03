@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Películas</title>
+    <style>
+        /* Estilos de la barra de navegación */
+        .navbar {
+            background-color: #007bff; /* Color de fondo azul */
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white; /* Color del texto blanco */
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #3781d2; /* Color de fondo azul oscuro al pasar el mouse */
+        }
+
+        /* Estilos del contenedor principal */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20220708/pngtree-tv-channel-movie-guide-movies-cable-reel-photo-image_990666.jpg'); /* Ruta de la imagen de fondo */
+            background-position: center; /* Centrar la imagen */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+        }
+
+        /* Otros estilos */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .movies-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .movie-item {
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: calc(20% - 20px); /* Ajuste para mostrar 5 elementos por fila */
+            max-width: 200px;
+        }
+
+        .movie-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-img {
+            max-width: 100%;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .movie-title {
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+        }
+
+        .movie-title:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <a href="#">Inicio</a>
+        <a href="#">Películas</a>
+        <a href="#">Contacto</a>
+    </div>
+
+    <!-- Contenedor principal -->
+<div class="container">
+    <h1>Buscar Películas</h1>
+    <form action="/buscar" method="POST">
+        <input type="text" name="busqueda" placeholder="Buscar película...">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h2>Películas Populares</h2>
+    {% if movies %}
+        <ul class="movies-list">
+            {% for movie in movies %}
+                <li class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="movie-img">
+                    <a href="/detalle/{{ movie.title }}" class="movie-title">{{ movie.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay películas disponibles en este momento.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
